@@ -7,7 +7,7 @@
         bottom: 20px;
         right: 20px;
         background-color: #007bff;
-        color: white;
+        color: rgb(15, 159, 73);
         border-radius: 50%;
         width: 60px;
         height: 60px;
@@ -24,7 +24,7 @@
         right: 20px;
         width: 350px;
         max-height: 500px;
-        background: white;
+        background: rgb(24, 121, 69);
         border: 1px solid #ccc;
         border-radius: 10px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
@@ -118,7 +118,9 @@
     .text-custom-green {
         color: #28a745 !important;
     }
-
+    .heading-color{
+        color: #190975 !important;
+    }
       
 </style>
 <body>
@@ -140,7 +142,7 @@
                     autocomplete="off" 
                     oninput="fetchCitySuggestions(this.value)"
                 >
-                <button class="btn btn-primary" type="submit">Search</button >
+                <button class="btn btn-success" type="submit">Search</button >
             </div>
 
             <!-- Suggestions Dropdown -->
@@ -150,7 +152,7 @@
 </div>
 
 <div class="top-visited-properties mt-5">
-    <h2 class="text-center mb-4">Top Visited Properties</h2>
+    <h2 class="text-center mb-4 heading-color">Top Visited Properties</h2>
     <div class="row justify-content-center">
         {% for property in top_visited_properties %}
             <div class="col-md-4 col-sm-7 col-lg-3 mb-5">
@@ -160,9 +162,11 @@
                             <img src="{{ property.image.url }}" class="card-img-top" alt="Property Image" style="height: 150px; object-fit: cover;">
                         {% endif %}
                         <div class="card-body text-center">
-                            <h5 class="card-title " style="color:#08581a; font-size: 22px; font-weight: bold;">{{ property.name }}</h5>
+                            <h5 class="card-title " style="color:#08581a; font-size: 24px; font-weight: bold;">{{ property.name }}</h5>
                             <p class="card-text mb-1 text-custom-green"><i class="fas fa-map-marker-alt"></i> {{ property.address }}</p>
-                            <p class="card-text mb-2 text-custom-green"><strong>${{ property.property_price }}</strong></p>
+                            <p class="card-text mb-2 text-custom-green" style="color:#08581a; font-size: 18px; font-weight: bold;">
+                                <strong>${{ property.property_price }}</strong>
+                            </p>                            
                             <p class="card-text small text-custom-green">Visits: {{ property.visit_count }}</p>
                             <a href="{% url 'property_details' property.id %}" class="btn btn-outline-custom-green btn-sm w-100 text-decoration-none">View Details</a>
                         </div>
@@ -176,7 +180,7 @@
 
 <!-- Recently Added Properties Section -->
 <div class="recently-added-properties mt-5">
-    <h2 class="text-center mb-4" style="font-size: 28px; font-weight: bold; letter-spacing: 1px;">Recently Added Properties</h2>
+    <h2 class="text-center mb-4 heading-color" style="font-size: 28px; font-weight: bold; letter-spacing: 1px;">Recently Added Properties</h2>
     <div class="row justify-content-center" style="row-gap: 30px;"> <!-- Add row gap for better spacing -->
         {% for property in recently_added_property %}
             <div class="col-md-4 col-sm-7 col-lg-2 mb-5">
@@ -192,9 +196,11 @@
                         </div>
                         {% endif %}
                         <div class="card-body text-center">
-                            <h5 class="card-title text-custom-green" style="font-size: 18px; font-weight: bold;">{{ property.name }}</h5>
-                            <p class="card-text mb-1" style="font-size: 14px; color: #666;"><i class="fas fa-map-marker-alt"></i> {{ property.address }}</p>
-                            <p class="card-text mb-2" style="font-size: 16px; font-weight: bold; color: #333;"><strong>${{ property.property_price }}</strong></p>
+                            <h5 class="card-title " style="color:#08581a; font-size: 18px; font-weight: bold;">{{ property.name }}</h5>
+                            <p class="card-text mb-1 text-custom-green"><i class="fas fa-map-marker-alt"></i> {{ property.address }}</p>
+                            <p class="card-text mb-2 text-custom-green" style="color:#08581a; font-size: 18px; font-weight: bold;">
+                                <strong>${{ property.property_price }}</strong>
+                            </p> 
                             <a href="{% url 'property_details' property.id %}" class="btn btn-outline-custom-green btn-sm w-100 text-decoration-none">View Details</a> <!-- Removed underline -->
                         </div>
                     </a>
@@ -207,7 +213,7 @@
 
 <!-- Top Rated  Properties Section -->
 <div class="recently-added-properties mt-5">
-    <h2 class="text-center mb-4" style="font-size: 28px; font-weight: bold; letter-spacing: 1px;">Top Rated Properties</h2>
+    <h2 class="text-center mb-4 heading-color" style="font-size: 28px; font-weight: bold; letter-spacing: 1px;">Top Rated Properties</h2>
     <div class="row justify-content-center" style="row-gap: 30px;"> <!-- Add row gap for better spacing -->
         {% for property in top_rated_property %}
             <div class="col-md-4 col-sm-7 col-lg-2 mb-5">
@@ -237,10 +243,12 @@
                         </div>
 
                         <div class="card-body text-center">
-                            <h5 class="card-title text-custom-green" style="font-size: 18px; font-weight: bold;">{{ property.name }}</h5>
-                            <p class="card-text mb-1" style="font-size: 14px; color: #666;"><i class="fas fa-map-marker-alt"></i> {{ property.address }}</p>
-                            <p class="card-text mb-2" style="font-size: 16px; font-weight: bold; color: #333;"><strong>${{ property.property_price }}</strong></p>
-                            <a href="{% url 'property_details' property.id %}" class="btn btn-outline-custom-green btn-sm w-100">View Details</a>
+                            <h5 class="card-title " style="color:#08581a; font-size: 18px; font-weight: bold;">{{ property.name }}</h5>
+                            <p class="card-text mb-1 text-custom-green"><i class="fas fa-map-marker-alt"></i> {{ property.address }}</p>
+                            <p class="card-text mb-2 text-custom-green" style="color:#08581a; font-size: 18px; font-weight: bold;">
+                                <strong>${{ property.property_price }}</strong>
+                            </p> 
+                            <a href="{% url 'property_details' property.id %}" class="btn btn-outline-custom-green btn-sm w-100 text-decoration-none">View Details</a> <!-- Removed underline -->
                         </div>
                     </a>
                 </div>
@@ -251,13 +259,13 @@
 
 <!-- agents Section -->
 <div class="container people-section mt-5 text-center">
-    <h2 class="mb-4">Top Real Estate Agents</h2>
+    <h2 class="mb-4 heading-color">Top Real Estate Agents</h2>
     <div class="row justify-content-center">
         {% for agent in top_agents %}
             <div class="col-md-3 d-flex mb-4">
                 <div class="card w-100 border-0 text-center">
                     <!-- <a href="{% url 'agent_details_for_users' agent.id %}"> -->
-                        <a href="#">
+                        <a href="#" class="text-decoration-none text-custom-green" >
                         <img src="{{ agent.agent_image.url }}" class="card-img-top rounded-circle mx-auto mt-3" style="height: 150px; width: 150px; object-fit: cover;" alt="Agent Image">
                         <div class="card-body">
                             <h5 class="card-title">{{ agent.agent.first_name }}</h5>  <!-- Make sure `agent.agent` is correctly set up -->
@@ -277,7 +285,7 @@
 
 
 <!-- Chatbox (Initially Hidden) -->
-<div id="chatbox" style="position: fixed; bottom: 90px; right: 20px; width: 300px; border: 1px solid #ccc; background: #f9f9f9; border-radius: 8px; padding: 10px; display: none;">
+<div id="chatbox" style="position: fixed; bottom: 90px; right: 20px; width: 300px; border: 1px solid #288447; background: #8dceb4; border-radius: 8px; padding: 10px; display: none;">
     <!-- Heading for the chat -->
     <h4 style="margin: 0; padding: 10px; text-align: center; background-color: #eef1f4; color: rgb(1, 14, 21); border-radius: 8px 8px 0 0;">
         How Can I Help You?

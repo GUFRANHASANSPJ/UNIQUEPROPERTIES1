@@ -32,14 +32,14 @@
                     <!-- Property Details -->
                     <div class="card-body text-center">
                         <a href="{% url 'property_details' item.property.id %}">
-                            <h6 class="card-title text-primary">{{ item.property.name }}</h6>
+                            <h6 class="card-title text-success">{{ item.property.name }}</h6>
                         </a>
                         <p class="small">{{ item.property.address }}</p>
                     </div>
 
                     <!-- Buttons for Details -->
                     <div class="card-footer d-flex justify-content-between">
-                        <a href="{% url 'property_details' item.property.id %}" class="btn btn-outline-primary btn-sm">Details</a>
+                        <a href="{% url 'property_details' item.property.id %}" class="btn btn-outline-success btn-sm">Details</a>
                     </div>
                 </div>
             </div>

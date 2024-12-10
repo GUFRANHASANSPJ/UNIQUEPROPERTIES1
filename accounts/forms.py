@@ -12,7 +12,7 @@ class UserForm1(forms.ModelForm):
 class UserForm2(forms.ModelForm):
     class Meta:
         model=UserProfile
-        fields= ['user_type','phone','address','images']
+        fields= ['phone','address','images']
     # captcha = ReCaptchaField()
 
 
@@ -35,7 +35,7 @@ class OwnerForm1(forms.ModelForm):
 class OwnerForm2(forms.ModelForm):
     class Meta:
         model=property_owner
-        fields=['user_type','phone','address','owner_image']
+        fields=['phone','address','owner_image']
     # captcha = ReCaptchaField()
 
 class EditOwnerProfileForm1(forms.ModelForm):

@@ -41,7 +41,7 @@ class PropertyForm(forms.ModelForm):
     class Meta:
         model=property
         fields='__all__'
-        exclude = ['owners','visit_count','images','lat', 'lng']
+        exclude = ['owners','visit_count','images','lat', 'lng',"rating_count","rating","p_rating"]
 
     def clean_latitude(self):
         latitude = self.cleaned_data.get('latitude')
@@ -61,6 +61,8 @@ class PropertyForm(forms.ModelForm):
         for field_name, field in self.fields.items():
             field.required = False  # Set fields to non-required if needed
             field.widget.attrs['placeholder'] = '' 
+            # Example: Customize specific fields if needed
+        self.fields['description'].widget.attrs.update({'class': 'form-control w-75'})
 
 
 class RatingForm(forms.Form):

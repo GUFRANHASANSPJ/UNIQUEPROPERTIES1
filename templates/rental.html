@@ -25,7 +25,7 @@
                 <option value="desc" {% if sort_order == "desc" %}selected{% endif %}>Descending</option>
             </select>
 
-            <button type="submit" class="btn btn-primary">Sort</button>
+            <button type="submit" class="btn btn-success">Sort</button>
         </form>
     </div>
 </div>
@@ -68,10 +68,10 @@
         </select>
 
         <!-- Search Button -->
-        <button type="submit" class="btn btn-primary" style="min-width: 90px; border-radius: 10px;">Filter</button>
+        <button type="submit" class="btn btn-success" style="min-width: 90px; border-radius: 10px;">Filter</button>
 
         <!-- Properties Near Me Button -->
-        <button type="button" class="btn btn-primary" id="near-me-btn" style="min-width: 140px;border-radius: 10px;">Properties Near Me</button>
+        <button type="button" class="btn btn-success" id="near-me-btn" style="min-width: 140px;border-radius: 10px;">Properties Near Me</button>
     </form>
 </div>
 
@@ -130,27 +130,28 @@
                             <p class="card-text">
                                 <!-- Icons for BHK, Bath, Bed -->
                                 <div class="d-flex justify-content-between">
-                                    <!-- BHK (1BHK) -->
-                                    <div class="d-flex align-items-center">
-                                        <i class="fas fa-bed ms-2 me-2"></i> <!-- Added me-2 for margin after icon -->
-                                        <span>{{ i.proprty_info }}</span> <!-- Assuming 'proprty_info' is the field for BHK -->
-                                    </div>
-                        
+                                    
                                     <!-- Bath -->
                                     <div class="d-flex align-items-center">
                                         <i class="fas fa-bath ms-2 me-2"></i> <!-- Added me-2 for margin after icon -->
                                         <span>{{ i.bath }} </span>
                                     </div>
-                        
+                                    
                                     <!-- Bed -->
                                     <div class="d-flex align-items-center">
                                         <i class="fas fa-bed ms-2 me-2"></i> <!-- Added me-2 for margin after icon -->
                                         <span>{{ i.bed }} </span>
                                     </div>
+
+                                    <!-- area -->
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-square ms-2 me-2"></i> <!-- Added me-2 for margin after icon -->
+                                        <span>{{ i.area }}</span> <!-- Assuming 'proprty_info' is the field for BHK -->
+                                    </div>
                                 </div>
                             </p>
                             
-                            <a class="btn btn-primary mt-auto" href="{% url 'property_details' i.id %}">Get details</a>
+                            <a class="btn btn-success mt-auto" href="{% url 'property_details' i.id %}">Get details</a>
                         </div>
                     </div>
                 </div>

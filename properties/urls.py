@@ -26,4 +26,5 @@ urlpatterns = [
     path('contacted_property/', views.Contacted_properties, name='contacted_property'),
     path('remove_contacted_properties/remove/<int:property_id>/', views.Remove_from_contacted_properties, name='remove_from_contacted_properties'),
     path('properties-near-me/', properties_near_me, name='properties_near_me'),
+
 ]   +static (settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
