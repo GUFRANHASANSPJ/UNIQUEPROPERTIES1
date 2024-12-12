@@ -288,6 +288,10 @@
                                     </div>
 
                                 {% endif %}
+                            {% else %}
+                            <div style="width: 100%; max-width: 400px;">  
+                                <a href="{% url 'login' %}" class="btn btn-info w-100">Get Property Details</a>
+                            </div>
                             {% endif %}
                         {% endfor %}
                     </div>

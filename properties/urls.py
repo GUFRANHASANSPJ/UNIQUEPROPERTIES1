@@ -27,4 +27,8 @@ urlpatterns = [
     path('remove_contacted_properties/remove/<int:property_id>/', views.Remove_from_contacted_properties, name='remove_from_contacted_properties'),
     path('properties-near-me/', properties_near_me, name='properties_near_me'),
 
+    path('api/countries/', views.get_countries, name='get_countries'),
+    path('api/states/<int:country_id>/', views.get_states, name='get_states'),
+    path('api/cities/<int:state_id>/', views.get_cities, name='get_cities'),
+    path('api/pincodes/<int:city_id>/', views.get_pincodes, name='get_pincodes'),
 ]   +static (settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

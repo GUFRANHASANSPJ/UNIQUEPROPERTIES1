@@ -42,7 +42,7 @@
                 <th>ID</th>
                 <th>Name</th>
                 <th>Location</th>
-                <th>Actions</th>
+                <th style="width: 22%;">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -52,9 +52,12 @@
                     <td>{{ property.name }}</td>
                     <td>{{ property.address }}</td>
                     <td>
-                        <!-- Edit and Delete Buttons -->
+                        <!-- View Button -->
+                        <a href="{% url 'property_details' property.id %}" class="btn btn-primary btn-sm me-3">View</a>
+                        <!-- Edit Button -->
                         <a href="{% url 'edit_property' property.id %}" class="btn btn-warning btn-sm me-3">Edit</a>
-                        <a href="{% url 'delete_property' property.id %}" class="btn btn-danger btn-sm ">Delete</a>
+                        <!-- Delete Button -->
+                        <a href="{% url 'delete_property' property.id %}" class="btn btn-danger btn-sm">Delete</a>
                     </td>
                 </tr>
             {% empty %}
@@ -64,6 +67,7 @@
             {% endfor %}
         </tbody>
     </table>
+    
 
 </div>
 

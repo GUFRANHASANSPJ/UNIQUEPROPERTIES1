@@ -299,7 +299,8 @@ def AddNewProperty(request):
     else:
         form = PropertyForm()
 
-    return render(request, 'addnewproperty.html', {'form': form})
+    # return render(request, 'addnewproperty.html', {'form': form})
+    return render(request, 'address.html', {'form': form})
 
 
 def edit_property(request, property_id):
@@ -461,3 +462,20 @@ def properties_near_me(request):
                 })
     # Render the template with properties and their distances
     return render(request, 'nearby_properties.html', {'properties': nearby_properties})
+
+
+def get_countries(request):
+    countries = Country.objects.values('id', 'name', 'country_code')
+    return JsonResponse(list(countries), safe=False)
+
+def get_states(request, country_id):
+    states = State.objects.filter(country_id=country_id).values('id', 'name')
+    return JsonResponse(list(states), safe=False)
+
+def get_cities(request, state_id):
+    cities = City.objects.filter(state_id=state_id).values('id', 'name')
+    return JsonResponse(list(cities), safe=False)
+
+def get_pincodes(request, city_id):
+    pincodes = Pincode.objects.filter(city_id=city_id).values('id', 'pincode')
+    return JsonResponse(list(pincodes), safe=False)

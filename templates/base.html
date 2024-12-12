@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 {% load static %}
+{% load crispy_forms_tags %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>uniqueproperties</title>
+    <title>Ratemynest</title>
     
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
@@ -21,7 +22,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
     
-    {% load crispy_forms_tags %}
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const authModal = new bootstrap.Modal(document.getElementById("authModal"));
@@ -198,81 +198,80 @@
     
   
     <!-- Navbar -->
-    <nav class="navbar" class="container" style="background-color: #01250b; max-height: 5rem; padding: 1rem;padding-top: 0.5rem;">
-        <!-- <div class="container"> -->
-
-            <ul class="nav navbar" style="padding-left: 0%; padding-right: 0%;">
-                <li class="nav-item"><a class="nav-link text-white fw-bold" href="{% url 'index' %}">Home</a></li>
-                <li class="nav-item"><a class="nav-link text-white fw-bold" href="{% url 'rental' %}">Rent</a></li>
-                <li class="nav-item"><a class="nav-link text-white fw-bold" href="{% url 'buy' %}">Buy</a></li>
-                <li class="nav-item"><a class="nav-link text-white fw-bold" href="{% url 'contact' %}">Contact</a></li>
-                {% if user.is_authenticated %}
-                    
-                    {% if request.user.userprofile.user_type == 'regular'%}
-                        <li class="nav-item"><a class="nav-link text-white fw-bold" href="{% url 'ownerreg' %}">Sell</a></li>
-                    {% else %}
-                        <li class="nav-item"><a class="nav-link text-white fw-bold" href="{% url 'addnewproperty' %}">Sell</a></li>
-                    {% endif %}
-                    
+    <nav class="navbar navbar-expand-lg" style="background-color: #011625; max-height: 5rem; padding: 1rem; padding-top: 0.5rem;">
+        <!-- Logo on the left -->
+        <a href="{% url 'index' %}" class="navbar-brand" style="padding-left: 0; margin-left: 25px;">
+            <img src="{% static 'logo/ratemynestlogo.png' %}" alt="Logo" class="logo-img" style="max-height: 120px;">
+        </a>
+    
+        <!-- Navigation links -->
+        <ul class="nav navbar" style="padding-left: 0%; padding-top:25px; padding-right: 0%;">
+            <li class="nav-item"><a class="nav-link text-white fw-bold" href="{% url 'index' %}">Home</a></li>
+            <li class="nav-item"><a class="nav-link text-white fw-bold" href="{% url 'rental' %}">Rent</a></li>
+            <li class="nav-item"><a class="nav-link text-white fw-bold" href="{% url 'buy' %}">Buy</a></li>
+            <li class="nav-item"><a class="nav-link text-white fw-bold" href="{% url 'contact' %}">Contact</a></li>
+            {% if user.is_authenticated %}
+                {% if request.user.userprofile.user_type == 'regular'%}
+                    <li class="nav-item"><a class="nav-link text-white fw-bold" href="{% url 'ownerreg' %}">Sell</a></li>
                 {% else %}
-                    <li class="nav-item"><a class="nav-link text-white fw-bold" href="{% url 'login' %}">Sell</a></li>
+                    <li class="nav-item"><a class="nav-link text-white fw-bold" href="{% url 'addnewproperty' %}">Sell</a></li>
                 {% endif %}
-            </ul>
-
-            <ul class="nav navbar ms-auto" style="display: contents; justify-content: flex-end;">
-                {% if user.is_authenticated %}
-                    <li class="nav-item dropdown" style="position: relative; margin-top: 25px;">
-                        <!-- Profile Icon -->
-                        <div class="profile-icon">
-                            {% if request.user.property_owner.user_type == 'owner' %}
-                                <a href="{% url 'ownerdetails' %}">
-                                    {% if request.user.property_owner.owner_image %}
-                                    <img src="{{ request.user.property_owner.owner_image.url|default:'default-owner.jpg' }}" 
-                                         alt="Owner Profile Picture" class="profile-img">
-                                    {% else %}
-                                        <p>O</p>
-                                    {% endif %}
-                                </a>
-                            {% else %}
-                                <a href="{% url 'userdetails' %}">
-                                    {% if request.user.userprofile.images %}
-                                    <img src="{{ request.user.userprofile.images.url|default:'default-user.jpg' }}" 
-                                         alt="User Profile Picture" class="profile-img">
-                                    {% else %}
+            {% else %}
+                <li class="nav-item"><a class="nav-link text-white fw-bold" href="{% url 'login' %}">Sell</a></li>
+            {% endif %}
+        </ul>
+    
+        <!-- User profile or login section -->
+        <ul class="nav navbar ms-auto" style="display: flex; justify-content: flex-end; align-items: center; padding-left: 0; margin-left: 0;">
+            {% if user.is_authenticated %}
+                <li class="nav-item dropdown" style="position: relative; margin-top: 30px;">
+                    <!-- Profile Icon -->
+                    <div class="profile-icon">
+                        {% if request.user.property_owner.user_type == 'owner' %}
+                            <a href="{% url 'ownerdetails' %}">
+                                {% if request.user.property_owner.owner_image %}
+                                    <img src="{{ request.user.property_owner.owner_image.url|default:'default-owner.jpg' }}" alt="Owner Profile Picture" class="profile-img" style="max-width: 40px; max-height: 40px;">
+                                {% else %}
+                                    <p>O</p>
+                                {% endif %}
+                            </a>
+                        {% else %}
+                            <a href="{% url 'userdetails' %}">
+                                {% if request.user.userprofile.images %}
+                                    <img src="{{ request.user.userprofile.images.url|default:'default-user.jpg' }}" alt="User Profile Picture" class="profile-img" style="max-width: 40px; max-height: 40px;">
+                                {% else %}
                                     <p>U</p>
-                                    {% endif %}
-                                </a>
-                            {% endif %}
-                        </div>
-            
-                        <!-- Dropdown Menu -->
-                        <div class="dropdown-menu">
-                            {% if request.user.userprofile %}
-                                <a href="{% url 'userdetails' %}" class="dropdown-item">My Profile</a>
-                            {% elif request.user.property_owner %}
-                                <a href="{% url 'ownerdetails' %}" class="dropdown-item">My Profile</a>
-                            {% endif %}
-
-                            <a href="{% url 'wishlist' %}" class="dropdown-item">Wishlist Properties</a>
-                            <a href="{% url 'contacted_property' %}" class="dropdown-item">Contacted Properties</a>
-                            <a href="{% url 'viewed_property' %}" class="dropdown-item">Viewed Properties</a>
-                            <a href="{% url 'userdetails' %}" class="dropdown-item">Searches</a>
-                            <a href="{% url 'userdetails' %}" class="dropdown-item">Recommendations</a>
-                        </div>
-                    </li>
-                {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link text-white fw-bold" href="{% url 'login' %}">
-                            <i class="fas fa-sign-in-alt"></i> Login
-                        </a>
-                    </li>
-                {% endif %}
-            </ul>
-            
-            
-            
-        <!-- </div> -->
+                                {% endif %}
+                            </a>
+                        {% endif %}
+                    </div>
+        
+                    <!-- Dropdown Menu -->
+                    <div class="dropdown-menu">
+                        {% if request.user.userprofile %}
+                            <a href="{% url 'userdetails' %}" class="dropdown-item">My Profile</a>
+                        {% elif request.user.property_owner %}
+                            <a href="{% url 'ownerdetails' %}" class="dropdown-item">My Profile</a>
+                        {% endif %}
+        
+                        <a href="{% url 'wishlist' %}" class="dropdown-item">Wishlist Properties</a>
+                        <a href="{% url 'contacted_property' %}" class="dropdown-item">Contacted Properties</a>
+                        <a href="{% url 'viewed_property' %}" class="dropdown-item">Viewed Properties</a>
+                        <a href="{% url 'userdetails' %}" class="dropdown-item">Searches</a>
+                        <a href="{% url 'userdetails' %}" class="dropdown-item">Recommendations</a>
+                    </div>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link text-white fw-bold" href="{% url 'login' %}">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+        
     </nav>
+    
 
     {% block content %}
     {% endblock %}
@@ -289,16 +288,13 @@
         </div>
         {% endif %}
 
-
-
-
     <!-- Footer -->
-    <footer class="text-white pt-5 pb-3" style="background-color: #01250b;">
+    <footer class="text-white pt-5 pb-3" style="background-color: #00a862;">
         <div class="container">
             <div class="row">
                 <!-- Logo and About Text -->
                 <div class="col-md-4 mb-3">
-                    <h5 class="text-warning fw-bold">UNIQUEPROPERTIES</h5>
+                    <h5 class="text-warning fw-bold">RATEMYNEST</h5>
                     <p>We can assist you in finding the ideal property and the house of your dreams.</p>
                     <div>
                         <a href="#" class="text-white me-3"><i class="bi bi-facebook"></i></a>
@@ -320,17 +316,18 @@
                 </div>
                 
                 <!-- Contact Information -->
-                <div class="col-md-4 mb-3">
-                    <h5>CONTACTS</h5>
-                    <p class="mb-1"><i class="bi bi-telephone-fill me-2"></i>(+91) 95767 786248</p>
-                    <p class="mb-1"><i class="bi bi-envelope-fill me-2"></i>contact@uniqueproperties.in</p>
-                    <p><i class="bi bi-geo-alt-fill me-2"></i>Btm-stage-2, Banglore </p>
-                </div>
+                    <div class="col-md-4 mb-3">
+                        <h5>CONTACTS</h5>
+                        <p class="mb-1"><i class="bi bi-telephone-fill me-2"></i>(+1) 123-456-7890</p>
+                        <p class="mb-1"><i class="bi bi-envelope-fill me-2"></i>contact@ratemynest.in</p>
+                        <p><i class="bi bi-geo-alt-fill me-2"></i>123 Main Street, Springfield, IL, 62704</p>
+                    </div>
+
             </div>
             
             <!-- Bottom Text -->
             <div class="text-center mt-4">
-                <p class="mb-1">&copy; 2024 UNIQUEPROPERTIES. All Rights Reserved</p>
+                <p class="mb-1">&copy; 2024 RATEMYNEST. All Rights Reserved</p>
                 <a href="#" class="text-white text-decoration-none me-2">Terms & Condition</a> |
                 <a href="#" class="text-white text-decoration-none ms-2">Privacy Policy</a>
             </div>

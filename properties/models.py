@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 from accounts.models import *
 
-    
+   
 class property(models.Model):
     post_type_choices=[
         ('Sell', 'Sell'),
@@ -76,7 +76,6 @@ class property(models.Model):
     ('Not-Furnished', 'Not-Furnished'),
     
 ]
-
     posted_date = models.DateTimeField(auto_now_add=True,null=True)
     parking = models.CharField(max_length=100, choices=parking_TYPE_CHOICES, default='no_parking', null=True, blank=True)
     facing = models.CharField(max_length=100, choices=facing_TYPE_CHOICES, default='East', null=True, blank=True)
@@ -94,7 +93,6 @@ class property(models.Model):
     Adjacent_Roads= models.CharField(null=True,max_length=100)
 
 # L2 Fields
-
 
     # property Property_Features
     balcony= models.BooleanField(default=True,null=True, blank=True)
@@ -321,3 +319,34 @@ class Contacted_Property(models.Model):
 
     def __str__(self):
         return f"{self.user.username} viewed {self.property.title}"
+
+
+
+
+class Country(models.Model):
+    name = models.CharField(max_length=100)  
+    country_code = models.CharField(max_length=10, unique=True) 
+
+    def __str__(self):
+        return self.name
+
+class State(models.Model):
+    name = models.CharField(max_length=100)
+    country = models.ForeignKey(Country, on_delete=models.CASCADE, related_name='states')
+
+    def __str__(self):
+        return self.name
+
+class City(models.Model):
+    name = models.CharField(max_length=100)
+    state = models.ForeignKey(State, on_delete=models.CASCADE, related_name='cities')
+
+    def __str__(self):
+        return self.name
+
+class Pincode(models.Model):
+    pincode = models.CharField(max_length=10)
+    city = models.ForeignKey(City, on_delete=models.CASCADE, related_name='pincodes')
+
+    def __str__(self):
+        return self.pincode
